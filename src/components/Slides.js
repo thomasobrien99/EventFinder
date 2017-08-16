@@ -51,7 +51,7 @@ export default class Slides extends Component {
 
 const styles = {
   button: {
-    backgroundColor: '#0288D1',
+    backgroundColor: 'dodgerblue',
     marginTop: 15
   },
   slide: {

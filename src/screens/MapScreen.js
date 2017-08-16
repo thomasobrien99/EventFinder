@@ -50,7 +50,7 @@ class MapScreen extends Component {
           <Button
             large
             title="Get Events!"
-            backgroundColor="#009688"
+            backgroundColor="lightseagreen"
             icon={{ name: 'search' }}
             onPress={this._handlePressButton} />
         </View>
