@@ -9,10 +9,20 @@ import {
   View
 } from 'react-native';
 
+import PropTypes from 'prop-types';
+
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SWIPE_THRESHOLD = SCREEN_WIDTH / 4;
 
 export default class EventDeck extends Component {
+  static propTypes = {
+    data: PropTypes.array,
+    onSwipeLeft: PropTypes.func,
+    onSwipeRight: PropTypes.func,
+    renderCard: PropTypes.func,
+    renderNoMoreCards: PropTypes.func
+  }
+
   static defaultProps = {
     onSwipeRight: () => {},
     onSwipeLeft: () => {},
@@ -32,9 +42,9 @@ export default class EventDeck extends Component {
       },
       onPanResponderRelease: (event, gesture) => {
         if (gesture.dx > SWIPE_THRESHOLD) {
-          this._finishSwipe('right')
+          this._finishSwipe('right');
         } else if (gesture.dx < -SWIPE_THRESHOLD) {
-          this._finishSwipe('left')
+          this._finishSwipe('left');
         } else {
           this._resetPosition();
         }
@@ -92,8 +102,8 @@ export default class EventDeck extends Component {
   _getAnimatedStyle() {
     const rotate = this._position.x.interpolate({
       inputRange: [-SCREEN_WIDTH * 2, 0, SCREEN_WIDTH * 2],
-      outputRange: ['-120deg', '0deg', '120deg']
-    })
+      outputRange: ['-130deg', '0deg', '130deg']
+    });
 
     return {
       ...this._position.getLayout(),
@@ -137,4 +147,4 @@ const styles = {
     position: 'absolute',
     width: '100%'
   }
-}
+};

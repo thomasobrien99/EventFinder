@@ -1,10 +1,11 @@
-import { uniqBy } from 'lodash'
+import { uniqBy } from 'lodash';
+
 import {
   SAVE_EVENT,
   CLEAR_EVENTS
 } from '../actions/types';
 
-export default function(state  = [], action) {
+export default function(state = [], action) {
   switch (action.type) {
     case SAVE_EVENT:
       return uniqBy([action.payload, ...state], event => event.$.id);

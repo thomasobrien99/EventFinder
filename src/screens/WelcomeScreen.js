@@ -1,23 +1,24 @@
 import React, { Component } from 'react';
-import { AsyncStorage, Text, View } from 'react-native';
+import { AsyncStorage } from 'react-native';
 
 import { AppLoading } from 'expo';
 import { isNull } from 'lodash';
+import PropTypes from 'prop-types';
 
 import Slides from '../components/Slides';
 
 const SLIDE_DATA = [
-  { text: 'Find events near you!', color: '#03A9F4'},
-  { text: 'Set a location, and then swipe right to like!', color: '#009688'}
+  { text: 'Find events near you!', color: 'aliceblue' },
+  { text: 'Set a location, and then swipe right to like!', color: 'dodgerblue' }
 ];
 
 export default class WelcomeScreen extends Component {
-  constructor(props) {
-    super (props);
+  static propTypes = {
+    navigation: PropTypes.object
+  }
 
-    this.state = {
-      token: null
-    };
+  state = {
+    token: null
   }
 
   async componentWillMount() {
@@ -31,7 +32,7 @@ export default class WelcomeScreen extends Component {
   }
 
   _handleCompleteSlides = () => {
-      this.props.navigation.navigate('auth');
+    this.props.navigation.navigate('auth');
   }
 
   render() {

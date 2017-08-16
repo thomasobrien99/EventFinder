@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import * as actions from '../actions';
 
 class AuthScreen extends Component {
+  static propTypes = {
+    fbLogin: PropTypes.func,
+    navigation: PropTypes.func
+  }
+
   componentDidMount() {
     this.props.fbLogin();
     this._onAuthComplete(this.props);

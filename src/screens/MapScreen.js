@@ -1,17 +1,23 @@
 import React, { Component } from 'react';
-import { ActivityIndicator, Text, View } from 'react-native';
+import { ActivityIndicator, View } from 'react-native';
 
 import { Button, Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { MapView } from 'expo';
+import PropTypes from 'prop-types';
 
 import * as actions from '../actions';
 
 class MapScreen extends Component {
+  static propTypes = {
+    getEvents: PropTypes.func,
+    navigation: PropTypes.object
+  }
+
   static navigationOptions = {
     title: 'Map',
     tabBarIcon: ({ tintColor }) => {
-      return <Icon color={tintColor} name="my-location" size={24} />
+      return <Icon color={tintColor} name="my-location" size={24} />;
     }
   }
 
@@ -31,15 +37,22 @@ class MapScreen extends Component {
 
   render() {
     if (!this.state.mapLoaded) {
-      <View style={styles.container}>
-        <ActivityIndicator size="large" />
-      </View>
+      return (
+        <View style={styles.container}>
+          <ActivityIndicator size="large" />
+        </View>
+      );
     }
     return (
       <View style={styles.container}>
         <MapView style={styles.mapView} initialRegion={this.state.region} onRegionChangeComplete={this._handleRegionChangeComplete} />
         <View style={styles.buttonContainer}>
-          <Button large title="Get Events!" backgroundColor="#009688" icon={{ name: 'search' }} onPress={this._handlePressButton}/>
+          <Button
+            large
+            title="Get Events!"
+            backgroundColor="#009688"
+            icon={{ name: 'search' }}
+            onPress={this._handlePressButton} />
         </View>
       </View>
     );
@@ -52,11 +65,11 @@ class MapScreen extends Component {
   }
 
   _handleRegionChangeComplete = region => {
-    this.setState({ region })
+    this.setState({ region });
   }
 }
 
-styles = {
+const styles = {
   buttonContainer: {
     position: 'absolute',
     bottom: 20
@@ -70,7 +83,4 @@ styles = {
   }
 };
 
-export default connect(null, actions)(MapScreen)
-
-//http://api.eventful.com/rest/events/search?...&where=32.746682,-117.162741&within=25
-// mXqWpmWFXXTJ28rz
+export default connect(null, actions)(MapScreen);

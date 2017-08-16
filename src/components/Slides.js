@@ -7,16 +7,22 @@ import {
 } from 'react-native';
 
 import { Button } from 'react-native-elements';
+import PropTypes from 'prop-types';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
 export default class Slides extends Component {
+  static propTypes = {
+    data: PropTypes.array,
+    onComplete: PropTypes.func
+  }
+
   render() {
     return (
       <ScrollView pagingEnabled horizontal style={{ flex: 1 }}>
         {this._renderSlides()}
       </ScrollView>
-    )
+    );
   }
 
   _renderSlides() {
@@ -33,7 +39,13 @@ export default class Slides extends Component {
   }
 
   _renderNextButton() {
-    return <Button buttonStyle={styles.button} title="Onwards!" raised onPress={this.props.onComplete} />;
+    return (
+      <Button
+        buttonStyle={styles.button}
+        title="Onwards!"
+        raised
+        onPress={this.props.onComplete} />
+    );
   }
 }
 
