@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 import { StackNavigator, TabNavigator } from 'react-navigation';
 import { Provider } from 'react-redux';
 
 import store from './src/store';
 import AuthScreen from './src/screens/AuthScreen';
-import WelcomeScreen from './src/screens/WelcomeScreen';
+import EventsScreen from './src/screens/EventsScreen';
+import IntroScreen from './src/screens/IntroScreen';
 import MapScreen from './src/screens/MapScreen';
-import DeckScreen from './src/screens/DeckScreen';
-import SettingsScreen from './src/screens/SettingsScreen';
 import ReviewScreen from './src/screens/ReviewScreen';
+import SettingsScreen from './src/screens/SettingsScreen';
 
 export default class App extends Component {
   render() {
@@ -22,7 +22,7 @@ export default class App extends Component {
 
     const MainNavigator = TabNavigator({
       map: { screen: MapScreen },
-      deck: { screen: DeckScreen },
+      events: { screen: EventsScreen },
       review: {
         screen: ReviewScreenNavigator
       }
@@ -33,7 +33,7 @@ export default class App extends Component {
     });
 
     const RootNavigator = TabNavigator({
-      welcome: { screen: WelcomeScreen },
+      intro: { screen: IntroScreen },
       auth: { screen: AuthScreen },
       main: { screen: MainNavigator }
     }, {

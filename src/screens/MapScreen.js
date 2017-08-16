@@ -60,7 +60,7 @@ class MapScreen extends Component {
 
   _handlePressButton = () => {
     this.props.getEvents(this.state.region, () => {
-      this.props.navigation.navigate('deck');
+      this.props.navigation.navigate('events');
     });
   }
 

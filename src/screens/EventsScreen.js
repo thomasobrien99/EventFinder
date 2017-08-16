@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import * as actions from '../actions';
 import EventDeck from '../components/EventDeck';
 
-class DeckScreen extends Component {
+class EventsScreen extends Component {
   static propTypes = {
     events: PropTypes.array
   }
@@ -105,4 +105,4 @@ function mapStateToProps({ events }) {
   };
 }
 
-export default connect(mapStateToProps, actions)(DeckScreen);
+export default connect(mapStateToProps, actions)(EventsScreen);

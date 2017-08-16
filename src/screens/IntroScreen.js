@@ -12,7 +12,7 @@ const SLIDE_DATA = [
   { text: 'Set a location, and then swipe right to like!', color: 'dodgerblue' }
 ];
 
-export default class WelcomeScreen extends Component {
+export default class IntroScreen extends Component {
   static propTypes = {
     navigation: PropTypes.object
   }
