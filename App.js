@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 import { StackNavigator, TabNavigator } from 'react-navigation';
+import { Provider } from 'react-redux';
 
+import store from './src/store';
 import AuthScreen from './src/screens/AuthScreen';
 import WelcomeScreen from './src/screens/WelcomeScreen';
 import MapScreen from './src/screens/MapScreen';
@@ -28,10 +30,17 @@ export default class App extends Component {
           }
         })
       }
+    }, {
+      navigationOptions: {
+        tabBarVisible: false
+      },
+      lazy: true
     });
 
     return (
+      <Provider store={store}>
         <MainNavigator />
+      </Provider>
     );
   }
 }
