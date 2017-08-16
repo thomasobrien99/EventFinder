@@ -1,13 +1,24 @@
 import React, { Component } from 'react';
-import { Platform, Text, View } from 'react-native';
+import {
+  Linking,
+  Platform,
+  ScrollView,
+  Text,
+  View
+} from 'react-native';
 
-import { Button } from 'react-native-elements';
+import { connect } from 'react-redux';
+import { Button, Card, Icon } from 'react-native-elements';
+import { MapView } from 'expo';
 
-export default class ReviewScreen extends Component {
+class ReviewScreen extends Component {
   static navigationOptions = ({ navigation }) => {
     const { navigate } = navigation;
     return {
-      title: 'Review Events',
+      title: 'Saved Events',
+      tabBarIcon: ({ tintColor }) => {
+        return <Icon color={tintColor} name="favorite" size={24} />
+      },
       headerRight: (
         <Button
           title="Settings"
@@ -21,11 +32,78 @@ export default class ReviewScreen extends Component {
     }
   }
 
+  _renderSavedEvents() {
+    if (!this.props.savedEvents.length) {
+      return (
+        <Card title="No Saved Events!">
+          <Button
+            title="Back To Map"
+            large
+            icon={{ name: 'my-location'}}
+            backgroundColor="green"
+            onPress={() => this.props.navigation.navigate('map')} />
+        </Card>
+      );
+    }
+
+    return this.props.savedEvents.map(event => {
+          const initialRegion = {
+            longitude: Number(event.longitude[0]),
+            latitude: Number(event.latitude[0]),
+            latitudeDelta: 0.045,
+            longitudeDelta: 0.02
+          };
+
+          const eventTitle = event.title[0].length < 30 ? event.title[0] : event.title[0].slice(0, 29) + '...';
+
+          return (
+            <Card title={event.title[0]} key={event.$.id}>
+              <View style={{ height: 200 }}>
+                <MapView
+                  style={{ flex: 1 }}
+                  cacheEnabled
+                  scrollEnabled={false}
+                  initialRegion={initialRegion}
+                />
+                <View style={styles.cardHeader}>
+                  <Text numberOfLines={1} style={styles.italics}>{event.venue_name[0]}</Text>
+                  <Text numberOfLines={1} style={styles.italics}>{event.start_time[0]}</Text>
+                </View>
+                <Button
+                  title="See Details!"
+                  backgroundColor="dodgerblue"
+                  onPress={() => Linking.openURL(event.url[0])}
+                />
+              </View>
+            </Card>
+          );
+        });
+  }
+
   render() {
     return (
-      <View>
-        <Text>I am the ReviewScreen</Text>
-      </View>
+      <ScrollView>
+        {this._renderSavedEvents()}
+      </ScrollView>
     );
   }
 }
+
+const styles = {
+  card: {
+    height: 200
+  },
+  cardHeader : {
+    marginBottom: 10,
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  },
+  italics: {
+    fontStyle: 'italic'
+  }
+}
+function mapStateToProps(state) {
+  return { savedEvents: state.savedEvents };
+}
+
+export default connect(mapStateToProps)(ReviewScreen)

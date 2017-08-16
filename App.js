@@ -15,21 +15,27 @@ import ReviewScreen from './src/screens/ReviewScreen';
 export default class App extends Component {
   render() {
 
+    const ReviewScreenNavigator = StackNavigator({
+      review: { screen: ReviewScreen },
+      settings: { screen: SettingsScreen }
+    });
+
     const MainNavigator = TabNavigator({
-      welcome: { screen: WelcomeScreen },
-      auth: { screen: AuthScreen},
-      main: {
-        screen: TabNavigator({
-          map: { screen: MapScreen },
-          deck: { screen: DeckScreen },
-          review: {
-            screen: StackNavigator({
-              review: { screen: ReviewScreen },
-              settings: { screen: SettingsScreen }
-            })
-          }
-        })
+      map: { screen: MapScreen },
+      deck: { screen: DeckScreen },
+      review: {
+        screen: ReviewScreenNavigator
       }
+    }, {
+      tabBarOptions: {
+        labelStyle: { fontSize: 12 }
+      }
+    });
+
+    const RootNavigator = TabNavigator({
+      welcome: { screen: WelcomeScreen },
+      auth: { screen: AuthScreen },
+      main: { screen: MainNavigator }
     }, {
       navigationOptions: {
         tabBarVisible: false
@@ -39,7 +45,7 @@ export default class App extends Component {
 
     return (
       <Provider store={store}>
-        <MainNavigator />
+        <RootNavigator />
       </Provider>
     );
   }
