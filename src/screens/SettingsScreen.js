@@ -13,6 +13,11 @@ class SettingsScreen extends Component {
     savedEvents: PropTypes.array
   }
 
+  static defaultProps = {
+    clearEvents: () => {},
+    savedEvents: []
+  }
+
   render() {
     return (
       <View>

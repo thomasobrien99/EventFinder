@@ -19,6 +19,10 @@ class ReviewScreen extends Component {
     savedEvents: PropTypes.array
   }
 
+  static defaultProps = {
+    savedEvents: []
+  }
+
   static navigationOptions = ({ navigation }) => {
     const { navigate } = navigation;
     return {

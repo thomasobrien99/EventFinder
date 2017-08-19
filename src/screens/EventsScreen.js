@@ -12,7 +12,13 @@ import EventDeck from '../components/EventDeck';
 
 class EventsScreen extends Component {
   static propTypes = {
-    events: PropTypes.array
+    events: PropTypes.array,
+    saveEvent: PropTypes.func
+  }
+
+  static defaultProps = {
+    events: [],
+    saveEvent: () => {}
   }
 
   static navigationOptions = {

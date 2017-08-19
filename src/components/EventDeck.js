@@ -24,6 +24,7 @@ export default class EventDeck extends Component {
   }
 
   static defaultProps = {
+    data: [],
     onSwipeRight: () => {},
     onSwipeLeft: () => {},
     renderCard: () => {},

@@ -9,7 +9,12 @@ import * as actions from '../actions';
 class AuthScreen extends Component {
   static propTypes = {
     fbLogin: PropTypes.func,
-    navigation: PropTypes.func
+    token: PropTypes.string
+  }
+
+  static defaultProps = {
+    fbLogin: () => {},
+    token: ''
   }
 
   componentDidMount() {

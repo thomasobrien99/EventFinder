@@ -10,9 +10,13 @@ import * as actions from '../actions';
 
 class MapScreen extends Component {
   static propTypes = {
-    getEvents: PropTypes.func,
-    navigation: PropTypes.object
+    getEvents: PropTypes.func
   }
+
+  static defaultProps = {
+    getEvents: () => {}
+  }
+
 
   static navigationOptions = {
     title: 'Map',

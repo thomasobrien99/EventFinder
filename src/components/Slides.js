@@ -17,6 +17,11 @@ export default class Slides extends Component {
     onComplete: PropTypes.func
   }
 
+  static defaultProps = {
+    data: [],
+    onComplete: () => {}
+  }
+
   render() {
     return (
       <ScrollView pagingEnabled horizontal style={styles.slidesScrollView}>
