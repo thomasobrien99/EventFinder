@@ -20,14 +20,14 @@ export default class EventDeck extends Component {
     onSwipeLeft: PropTypes.func,
     onSwipeRight: PropTypes.func,
     renderCard: PropTypes.func,
-    : PropTypes.func
+    renderEmptyDeck: PropTypes.func
   }
 
   static defaultProps = {
     onSwipeRight: () => {},
     onSwipeLeft: () => {},
     renderCard: () => {},
-    : () => {}
+    renderEmptyDeck: () => {}
   }
 
   constructor(props) {
@@ -114,7 +114,7 @@ export default class EventDeck extends Component {
 
   _renderCards() {
     if (this.state.index >= this.props.data.length) {
-      return this.props.();
+      return this.props.renderEmptyDeck();
     }
 
     return this.props.data.map((item, index) => {

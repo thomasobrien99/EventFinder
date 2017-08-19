@@ -29,7 +29,7 @@ class EventsScreen extends Component {
           data={this.props.events}
           onSwipeRight={event => this.props.saveEvent(event)}
           renderCard={this._renderCard}
-          ={this._} />
+          renderEmptyDeck={this._renderEmptyDeck} />
       </View>
     );
   }
@@ -62,7 +62,7 @@ class EventsScreen extends Component {
     );
   }
 
-  _ = () => {
+  _renderEmptyDeck = () => {
     return (
       <Card title="Search again to see more events!">
         <Button
