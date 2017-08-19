@@ -20,14 +20,14 @@ export default class EventDeck extends Component {
     onSwipeLeft: PropTypes.func,
     onSwipeRight: PropTypes.func,
     renderCard: PropTypes.func,
-    renderNoMoreCards: PropTypes.func
+    : PropTypes.func
   }
 
   static defaultProps = {
     onSwipeRight: () => {},
     onSwipeLeft: () => {},
     renderCard: () => {},
-    renderNoMoreCards: () => {}
+    : () => {}
   }
 
   constructor(props) {
@@ -58,7 +58,8 @@ export default class EventDeck extends Component {
     Animated.timing(this._position, {
       toValue: {
         x: direction === 'right' ? SCREEN_WIDTH : -SCREEN_WIDTH,
-        y: 0 },
+        y: 0
+      },
       duration: 300
     }).start(() => {
       this._onSwipeFinished(direction);
@@ -81,7 +82,7 @@ export default class EventDeck extends Component {
     const item = data[this.state.index];
 
     direction === 'right' ? onSwipeRight(item) : onSwipeLeft(item);
-    this._position.setValue({ x: 0, y: 0 }); // POTENTIAL BUG??
+    this._position.setValue({ x: 0, y: 0 });
     this.setState({ index: this.state.index + 1 });
   }
 
@@ -93,7 +94,7 @@ export default class EventDeck extends Component {
 
   render() {
     return (
-      <View style={{ width: '100%' }}>
+      <View style={styles.cardsContainer}>
         {this._renderCards()}
       </View>
     );
@@ -113,10 +114,10 @@ export default class EventDeck extends Component {
 
   _renderCards() {
     if (this.state.index >= this.props.data.length) {
-      return this.props.renderNoMoreCards();
+      return this.props.();
     }
 
-    const eventDeck = this.props.data.map((item, index) => {
+    return this.props.data.map((item, index) => {
       if (index < this.state.index) return null;
       if (index === this.state.index) {
         return (
@@ -131,18 +132,25 @@ export default class EventDeck extends Component {
       return (
         <Animated.View
           key={item.$.id}
-          style={[styles.cardStyle, { top: 10 * (index - this.state.index), zIndex: -index }]}>
+          style={[
+            styles.cardStyle,
+            {
+              right: 2 * (index - this.state.index),
+              top: 10 * (index - this.state.index),
+              zIndex: -index
+            }
+          ]}>
           {this.props.renderCard(item)}
         </Animated.View>
       );
     });
-
-    return Platform.OS === 'android' ? eventDeck : eventDeck.reverse();
-
   }
 }
 
 const styles = {
+  cardsContainer: {
+    width: '100%'
+  },
   cardStyle: {
     position: 'absolute',
     width: '100%'

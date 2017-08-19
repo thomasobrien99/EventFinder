@@ -12,6 +12,8 @@ import { Button, Card, Icon } from 'react-native-elements';
 import { MapView } from 'expo';
 import PropTypes from 'prop-types';
 
+import { DEFAULT_LATITUDE_DELTA, DEFAULT_LONGITUDE_DELTA } from '../constants';
+
 class ReviewScreen extends Component {
   static propTypes = {
     savedEvents: PropTypes.array
@@ -28,7 +30,7 @@ class ReviewScreen extends Component {
         <Button
           title="Settings"
           backgroundColor="white"
-          color="rgba(0, 122, 255)"
+          color="rgb(0, 122, 255)"
           onPress={() => navigate('settings')} />
       ),
       style: {
@@ -55,8 +57,8 @@ class ReviewScreen extends Component {
       const initialRegion = {
         longitude: Number(event.longitude[0]),
         latitude: Number(event.latitude[0]),
-        latitudeDelta: 0.045,
-        longitudeDelta: 0.02
+        latitudeDelta: DEFAULT_LATITUDE_DELTA,
+        longitudeDelta: DEFAULT_LONGITUDE_DELTA
       };
 
       const eventTitle = event.title[0].length < 30 ? event.title[0] : event.title[0].slice(0, 29) + '...';

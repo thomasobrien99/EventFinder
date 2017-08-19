@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { MapView } from 'expo';
 import PropTypes from 'prop-types';
 
+import { DEFAULT_LATITUDE_DELTA, DEFAULT_LONGITUDE_DELTA } from '../constants';
 import * as actions from '../actions';
 import EventDeck from '../components/EventDeck';
 
@@ -28,7 +29,7 @@ class EventsScreen extends Component {
           data={this.props.events}
           onSwipeRight={event => this.props.saveEvent(event)}
           renderCard={this._renderCard}
-          renderNoMoreCards={this._renderNoMoreCards} />
+          ={this._} />
       </View>
     );
   }
@@ -46,8 +47,8 @@ class EventsScreen extends Component {
             initialRegion={{
               latitude: Number(event.latitude[0]),
               longitude: Number(event.longitude[0]),
-              latitudeDelta: 0.045,
-              longitudeDelta: 0.02
+              latitudeDelta: DEFAULT_LATITUDE_DELTA,
+              longitudeDelta: DEFAULT_LONGITUDE_DELTA
             }} />
         </View>
         <View style={styles.cardHeader}>
@@ -61,7 +62,7 @@ class EventsScreen extends Component {
     );
   }
 
-  _renderNoMoreCards = () => {
+  _ = () => {
     return (
       <Card title="Search again to see more events!">
         <Button
