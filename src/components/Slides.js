@@ -19,7 +19,7 @@ export default class Slides extends Component {
 
   render() {
     return (
-      <ScrollView pagingEnabled horizontal style={{ flex: 1 }}>
+      <ScrollView pagingEnabled horizontal style={styles.slidesScrollView}>
         {this._renderSlides()}
       </ScrollView>
     );
@@ -28,9 +28,7 @@ export default class Slides extends Component {
   _renderSlides() {
     return this.props.data.map((slideObject, index) => {
       return (
-        <View
-          key={slideObject.text}
-          style={[styles.slide, { backgroundColor: slideObject.color }]}>
+        <View key={slideObject.text} style={[styles.slide, { backgroundColor: slideObject.color }]}>
           <Text style={styles.slideText}>{slideObject.text}</Text>
           {index === this.props.data.length - 1 ? this._renderNextButton() : null}
         </View>
@@ -64,5 +62,8 @@ const styles = {
     textAlign: 'center',
     color: 'white',
     fontSize: 30
+  },
+  slidesScrollView: {
+    flex: 1
   }
 };

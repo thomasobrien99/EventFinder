@@ -62,24 +62,20 @@ class ReviewScreen extends Component {
       const eventTitle = event.title[0].length < 30 ? event.title[0] : event.title[0].slice(0, 29) + '...';
 
       return (
-        <Card title={eventTitle} key={event.$.id}>
-          <View style={{ height: 200 }}>
-            <MapView
-              style={{ flex: 1 }}
-              cacheEnabled
-              scrollEnabled={false}
-              initialRegion={initialRegion}
-            />
-            <View style={styles.cardHeader}>
-              <Text numberOfLines={1} style={styles.italics}>{event.venue_name[0]}</Text>
-              <Text numberOfLines={1} style={styles.italics}>{event.start_time[0]}</Text>
-            </View>
-            <Button
-              title="See Details!"
-              backgroundColor="dodgerblue"
-              onPress={() => Linking.openURL(event.url[0])}
-            />
+        <Card containerStyle={styles.card} title={eventTitle} key={event.$.id}>
+          <MapView
+            style={styles.map}
+            cacheEnabled
+            scrollEnabled={false}
+            initialRegion={initialRegion} />
+          <View style={styles.cardHeader}>
+            <Text numberOfLines={1} style={styles.cardHeaderText}>{event.venue_name[0]}</Text>
+            <Text numberOfLines={1} style={styles.cardHeaderText}>{event.start_time[0]}</Text>
           </View>
+          <Button
+            title="See Details!"
+            backgroundColor="dodgerblue"
+            onPress={() => Linking.openURL(event.url[0])} />
         </Card>
       );
     });
@@ -99,12 +95,15 @@ const styles = {
     height: 200
   },
   cardHeader: {
-    marginBottom: 10,
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    marginBottom: 10
   },
-  italics: {
+  cardHeaderText: {
     fontStyle: 'italic'
+  },
+  map: {
+    flex: 1
   }
 };
 

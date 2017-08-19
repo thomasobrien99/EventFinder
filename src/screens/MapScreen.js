@@ -38,13 +38,13 @@ class MapScreen extends Component {
   render() {
     if (!this.state.mapLoaded) {
       return (
-        <View style={styles.container}>
+        <View style={styles.screenContainer}>
           <ActivityIndicator size="large" />
         </View>
       );
     }
     return (
-      <View style={styles.container}>
+      <View style={styles.screenContainer}>
         <MapView style={styles.mapView} initialRegion={this.state.region} onRegionChangeComplete={this._handleRegionChangeComplete} />
         <View style={styles.buttonContainer}>
           <Button
@@ -74,7 +74,7 @@ const styles = {
     position: 'absolute',
     bottom: 20
   },
-  container: {
+  screenContainer: {
     flex: 1,
     justifyContent: 'center'
   },

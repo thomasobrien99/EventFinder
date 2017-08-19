@@ -38,10 +38,10 @@ class EventsScreen extends Component {
 
     return (
       <Card containerStyle={styles.card} title={eventTitle}>
-        <View style={{ height: 300 }}>
+        <View style={styles.mapContainer}>
           <MapView
             scrollEnabled={false}
-            style={{ flex: 1 }}
+            style={styles.map}
             cacheEnabled
             initialRegion={{
               latitude: Number(event.latitude[0]),
@@ -51,8 +51,8 @@ class EventsScreen extends Component {
             }} />
         </View>
         <View style={styles.cardHeader}>
-          <Text style={{flex: 1}}>{event.venue_name[0]}</Text>
-          <Text style={{flex: 1}}>{event.start_time[0]}</Text>
+          <Text style={styles.cardHeaderText}>{event.venue_name[0]}</Text>
+          <Text style={styles.cardHeaderText}>{event.start_time[0]}</Text>
         </View>
         <View style={styles.cardBody}>
           <Text numberOfLines={3}>{event.description[0].replace(/<[a-z]+>|<\/[a-z]+>/g, '')}</Text>
@@ -73,10 +73,6 @@ class EventsScreen extends Component {
       </Card>
     );
   }
-
-  _handleSwipeRight = () => {
-
-  }
 }
 
 const styles = {
@@ -90,9 +86,18 @@ const styles = {
     overflow: 'hidden',
     width: '100%'
   },
+  cardHeaderText: {
+    flex: 1
+  },
   cardBody: {
     overflow: 'hidden',
     width: '100%'
+  },
+  mapContainer: {
+    height: 300
+  },
+  map: {
+    flex: 1
   },
   screenContainer: {
     marginTop: 15
